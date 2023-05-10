@@ -1,0 +1,37 @@
+\chapter{System Design}
+\justify
+\quad 
+"Voice over IP is the technology of digitizing sound, compressing it, breaking it up into data packets , and sending it over an IP (internet protocol ) network where it is reassembled , decompressed , and converted back into an analog wave form ." The transmission of sound over a packet switched network in this manner is an order of magnitude more efficient than the transmission of sound over a circuit switched network.
+
+\section{System Analysis}
+\justify
+\quad
+\begin{itemize}
+    \item \textbf{To Achieve high security using VoIP.}
+    \item \textbf{To develop trust factor in communication system.}
+    \item \textbf{To achieve privacy in system by encrypting all activities.}
+    \item \textbf{To implement decentralized system so that data is transferred through multiple systems.}
+\end{itemize}
+
+\subsection{Private VoIP Systems}
+In the case of a private VoIP system , the primary telephony system itself is located within the private infrastructure of the end-user organization. Usually, the system will be deployed on-premises at a site within the direct control of the organization . This can provide numerous benefits in terms of QoS control (see below ), cost scalability , and ensuring privacy and security of communications traffic. However, the responsibility for ensuring that the VoIP system remains performant and resilient is predominantly vested in the end-user organization. This is not the case with a Hosted VoIP solution.
+Private VoIP systems can be physical hardware PBX appliances, converged with other infrastructure, or they can be deployed as software applications. Generally, the latter two options will be in the form of a separate virtualized appliance . However , in some scenarios, these systems are deployed on bare metal infrastructure or IoT devices. With some solutions, such as 3CX, companies can attempt to blend the benefits of hosted and private on-premises systems by implementing their own private solution but within an external environment. Examples can include data centre collocation services, public cloud, or private cloud locations. For on-premises systems , local endpoints within the same location typically connect directly over the LAN. For remote and external endpoints, available connectivity options mirror those of Hosted or Cloud VoIP solutions. However, VoIP traffic to and from the on-premises systems can often also be sent over secure private links. Examples include personal VPN, site-to-site VPN, private networks such as MPLS and SD-WAN, or via private SBCs (Session Border Controllers). While exceptions and private peering options do exist , it is generally uncommon for those private connectivity methods to be provided by Hostedor Cloud VoIP providers.
+
+\section{Quality Of Service}
+\justify \quad
+The quality of voice transmission is characterized by several metrics that may be monitored by network elements and by the user agent hardware or software. Such metrics include network packet loss, packet jitter, packet latency (delay), post-dial delay ,and echo.The metrics are determined by VoIP performance testing and monitoring
+
+\subsection{Design Consideration}
+\justify \quad
+Communication on the IP network is perceived as less reliable in contrast to the circuit switched public telephone network because it does not provide a network -based mechanism to ensure that data packets are not lost, and are delivered in sequential order. It is a best-effort network without fundamental quality of service (QoS) guarantees . Voice , and all other data , travels in packets over IP networks with fixed maximum capacity . This system may be more prone to data loss in the presence of congestion [a] than traditional circuit switched systems ; a circuit switched system of insufficient capacity will refuse new connections while carrying the remainder without impairment, while the quality of real-time data such as telephone conversations on packet-switched networks degrades dramatically . Therefore , VoIP implementations may face problems with latency, packet loss, and jitters.
+
+\newline 
+\justify\quad
+By default, network routers handle traffic on a first-come, first-served basis. Fixed delays cannot be controlled as they are caused by the physical distance the packets travel. They are especially problematic when satellite circuits are involved because of the long distance to a geostationary satellite and back; delays of 400–600 ms are typical. Latency can be minimized by marking voice packets as being delay-sensitive with QoS methods such as DiffServ.
+
+\newline
+\justify\quad
+Network routers on high volume traffic links may introduce latency that exceeds
+permissible thresholds for VoIP . Excessive load on a link can cause congestion and associated queueing delays and packet loss. This signals a transport protocol like TCP to reduce its transmission rate to alleviate the congestion . But VoIP usually uses UDP not TCP because recovering from congestion through retransmission usually entails too much latency. So QoS mechanisms can avoid the undesirable loss of VoIP packets by immediately transmitting them ahead of any queued bulk traffic on the same link, even when the link is congested by bulk traffic.
+
+\newpage
